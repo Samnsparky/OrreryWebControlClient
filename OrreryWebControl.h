@@ -29,6 +29,7 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #if TESTING == 1
 #include "emulated_env.h"

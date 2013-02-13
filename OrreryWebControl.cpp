@@ -13,17 +13,17 @@
 OrreryWebControl::OrreryWebControl()
 {
     byte tempServerIP[] = SERVER_IP;
-    serverIP = new byte[SERVER_IP_LEN];
+    serverIP = (byte *) malloc(SERVER_IP_LEN);
     memcpy(serverIP, tempServerIP, SERVER_IP_LEN);
 
-    host = new char[HOST_LEN];
+    host = (char *) malloc(HOST_LEN);
     strcpy(host, HOST_STR);
 }
 
 OrreryWebControl::~OrreryWebControl()
 {
-    delete host;
-    delete serverIP;
+    free(host);
+    free(serverIP);
 }
 
 void OrreryWebControl::checkIn(OrreryWebConfig * configStruct, float motorSpeed,
