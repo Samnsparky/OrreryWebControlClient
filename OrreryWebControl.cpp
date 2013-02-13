@@ -1,3 +1,10 @@
+/**
+ * HTTP-based Arduino library for controlling an Orrery through a web service.
+ *
+ * @auth Sam Pottinger
+ * @lice GNU GPL v3
+**/
+
 #ifndef ORRERY_WEB_CONTROL_IMP
 #define ORRERY_WEB_CONTROL_IMP
 

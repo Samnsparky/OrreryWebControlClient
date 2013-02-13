@@ -1,3 +1,13 @@
+/**
+ * Implementation of the HTTPClient dependency injection construct.
+ *
+ * @auth Sam Pottinger
+ * @license GNU GPL v3
+**/
+
+#ifndef HTTP_CLIENT_IMP
+#define HTTP_CLIENT_IMP
+
 #include "HTTPClient.h"
 
 
@@ -11,7 +21,7 @@ HTTPClient::HTTPClient(char * newHost, byte * newServer)
     lastData = new char[1];
     lastData[0] = '\0';
 
-    streamClosed = TRUE;
+    streamClosed = true;
 }
 
 FILE * HTTPClient::postURI(char * uri, char * data)
@@ -25,7 +35,7 @@ FILE * HTTPClient::postURI(char * uri, char * data)
     lastData = new char[strlen(data)];
     strcpy(lastData, data);
 
-    streamClosed = FALSE;
+    streamClosed = false;
 
     return fopen(TEST_RET_VAL_FILE,"r");
 }
@@ -37,7 +47,7 @@ int HTTPClient::getLastReturnCode()
 
 void HTTPClient::closeStream(FILE * stream)
 {
-    streamClosed = TRUE;
+    streamClosed = true;
     fclose(stream);
 }
 
@@ -68,3 +78,5 @@ const char * HTTPClient::getLastURI()
 {
     return lastURI;
 }
+
+#endif
