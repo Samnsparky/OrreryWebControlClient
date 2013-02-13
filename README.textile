@@ -107,6 +107,23 @@ h2. Example
 </pre>
 
 
+h2. Explanation of the OrreryWebConfig Struct
+
+The OrreryWebConfig struct has the following values:
+ * bool connectedSuccesfully: Indicates if a connection to the server was made.
+ * bool resultOK: Indicates if the server returned a result successfully.
+ * int statusCode: HTTP status code of the server response.
+ * bool successParse: Indicates if the response from the server was correctly parsed.
+ * float motorSpeed: The desired motor speed from the server's user configuration record.
+ * bool relayEnabled: The desired relay state from the server's user configuration record.
+
+In practice, all of the following should be checked to see if they are true
+after a request:
+ * connectedSuccesfully
+ * resultOK
+ * successParse
+
+
 h2. Technologies and Resources Used
 
 * HTTPClient (https://github.com/interactive-matter/HTTPClient) under the "GNU GPL v3":http://www.gnu.org/licenses/gpl.html
