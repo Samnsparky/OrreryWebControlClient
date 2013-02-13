@@ -1,0 +1,113 @@
+h1. OrreryWebControl Arduino Client
+
+(c) 2013 "Sam Pottinger":http://gleap.org
+Released under the "GNU GPL v3":http://www.gnu.org/licenses/gpl.html license.
+Done for "CU Engineering Honors Program":http://www.cuhonorsengineering.com/
+
+
+h2. Motivation
+
+While some libraries exist that allow developers to control Arduino units
+remotely, the constraints of the honor's program's orrery project exceed
+the needs of free solutions but remain outside the realm of more expensive
+platforms. To accomodate this niche, a simple HTTP-based web control system
+allows the system to report its status while accepting user configuration
+values. 
+
+This repository contains an Arduino library that simplifies communication with
+the orrery's web-based control service. By abstracting request, network, and
+response operations, this library helps maintain loose coupling between
+software components supporting the orrery project.
+
+
+h2. Automated Local Testing
+
+This solution offers local unit testing outside of the Arduino environment using
+some custom dependency injection constructs. To run:
+ * Ensure the TESTING macro in OrreryWebControl.h is set to 1
+ * $ make OrreryWebControl_test
+ * ./OrreryWebControl_test
+
+
+h2. Arduino Environment Setup
+
+Arduino sketches only immediately require the OrreryWebControl.cpp and
+OrreryWebControl.h files. However, the HTTPClient library will also need to be
+installed (see https://github.com/interactive-matter/HTTPClient).
+
+Assuming HTTPClient is installed,
+ * Locate the libraries directory in your Arduino sketches folder.
+ * Create a directory called "OrreryWebControl" in that libraries folder.
+ * Move OrreryWebControl.cpp and OrreryWebControl.h into that new directory.
+ * Ensure the TESTING macro in OrreryWebControl.h is set to 0 
+
+
+h2. Usage
+
+Following convention on the Arduino platform, the OrreryWebControl Arduino
+Client library asks that its dependency (HTTPClient) be included explicitly
+in the sketch before itself. This, in turn, requires the Ethernet library to be
+linked before HTTPClient and the SPI library for that. The resulting set of
+includes looks like:
+
+<pre>
+<code>
+    #include <SPI.h>
+    #include <Dhcp.h>
+    #include <Dns.h>
+    #include <Ethernet.h>
+    #include <EthernetClient.h>
+    #include <EthernetServer.h>
+    #include <EthernetUdp.h>
+    #include <util.h>
+    #include <HTTPClient.h>
+    #include <OrreryWebControl.h>
+</code>
+</pre>
+
+
+h2. Example
+
+<pre>
+<code>
+    #include <SPI.h>
+    #include <Dhcp.h>
+    #include <Dns.h>
+    #include <Ethernet.h>
+    #include <EthernetClient.h>
+    #include <EthernetServer.h>
+    #include <EthernetUdp.h>
+    #include <util.h>
+    #include <HTTPClient.h>
+    #include <OrreryWebControl.h>
+
+    // MAC address for the ethernet controller.
+    byte macAddr[] = {  0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; 
+    OrreryWebControl webController;
+    int motorSpeed = 100;
+    int motorDraw = 200;
+    int rotations = 300;
+     
+    void setup()
+    {
+      Ethernet.begin(macAddr);
+    }
+     
+    void loop()
+    {
+      OrreryWebConfig latestWebConfig;
+     
+      // ... other logic including something to maybe wait 3 seconds
+      
+      webController.checkIn(&latestWebConfig, motorSpeed, motorDraw, rotations);
+      
+      // ... other logic
+    }
+</code>
+</pre>
+
+
+h2. Technologies and Resources Used
+
+* HTTPClient (https://github.com/interactive-matter/HTTPClient) under the "GNU GPL v3":http://www.gnu.org/licenses/gpl.html
+* minunit (https://github.com/siu/minunit) under the "MIT License":http://opensource.org/licenses/MIT
