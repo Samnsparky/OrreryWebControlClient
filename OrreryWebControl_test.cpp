@@ -11,7 +11,7 @@
 #include "HTTPClient.h"
 #include "OrreryWebControl.h"
 
-#define EXPECTED_POST_REQUSET_DATA "motorSpeed=%f&motorDraw=%f&rotations=%f";
+#define EXPECTED_POST_REQUSET_DATA "motor_speed=%f&motor_draw=%f&rotations=%f";
 #define TEST_POST_RET_VAL "{\"relay_enabled\": true, \"motor_speed\": 400.0}"
 
 

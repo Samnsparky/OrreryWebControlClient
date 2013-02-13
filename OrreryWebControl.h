@@ -17,7 +17,7 @@
 #define MAX_REQUEST_DATA_PAYLOAD_SIZE 70
 #define MAX_RESPONSE_DATA_PAYLOAD_SIZE 200
 #define NUM_RESPONSE_JSON_TOKENS 6
-#define DATA_FORMAT_STR "motorSpeed=%f&motorDraw=%f&rotations=%f"
+#define DATA_FORMAT_STR "motor_speed=%f&motor_draw=%f&rotations=%f"
 #define STATUS_POST_URL "/api/status.json"
 #define STATUS_POST_URL_LEN 16
 #define STATUS_OK 200
